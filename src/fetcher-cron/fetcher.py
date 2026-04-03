@@ -25,8 +25,27 @@ def fetch_all():
                     "timestamp": time.time()
                 }
                 
-                requests.post(GATEWAY_URL, json=payload)
-                print(f"✅ {city['name']}: {payload['temperature']}°C envoyé.")
+                retry_count = 0
+                max_retries = 3
+                sent = False
+                
+                while retry_count < max_retries and not sent:
+                    try:
+                        r = requests.post(GATEWAY_URL, json=payload, timeout=5)
+                        if r.status_code == 200:
+                            print(f"✅ {city['name']}: {payload['temperature']}°C envoyé.")
+                            sent = True
+                        else:
+                            print(f"⚠️ {city['name']}: Erreur {r.status_code} lors de l'envoi. Tentative {retry_count+1}/{max_retries}")
+                            retry_count += 1
+                            time.sleep(2)
+                    except requests.exceptions.RequestException as e:
+                        print(f"⚠️ {city['name']}: Erreur de connexion ({e}). Tentative {retry_count+1}/{max_retries}")
+                        retry_count += 1
+                        time.sleep(2)
+
+                if not sent:
+                    print(f"❌ {city['name']}: Échec de l'envoi après {max_retries} tentatives.")
                 
             except Exception as e:
                 print(f"Erreur pour {city['name']}: {e}")

@@ -1,9 +1,11 @@
 <template>
   <div class="dashboard">
-    <div v-for="data in meteoData" :key="data.city" class="card">
+    <div v-if="loading">Chargement...</div>
+    <div v-else-if="meteoData.length === 0">Aucune donnée disponible.</div>
+    <div v-for="data in meteoData" :key="data.id" class="card">
       <h3>{{ data.city }}</h3>
       <p class="temp">{{ data.temperature }}°C</p>
-      <small>Mis à jour à : {{ formatTime(data.timestamp) }}</small>
+      <small>Mis à jour à : {{ formatTime(data.date_releve) }}</small>
     </div>
   </div>
 </template>
@@ -13,7 +15,7 @@ export default {
   name: "App",
   data() {
     return {
-      meteoData: {},
+      meteoData: [],
       loading: true,
     };
   },
@@ -21,6 +23,11 @@ export default {
     this.fetchHistorique();
   },
   methods: {
+    formatTime(dateStr) {
+      if (!dateStr) return "N/A";
+      const date = new Date(dateStr);
+      return date.toLocaleTimeString();
+    },
     async fetchHistorique() {
       try {
         const response = await fetch("/api/history");

@@ -6,19 +6,11 @@ spec:
   rules:
   - http:
       paths:
-      # Trafic web vers le Dashboard
+      # Point d'entrée unique via la Gateway
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: dashboard-svc
-            port:
-              number: 81
-      # Requêtes API vers la Gateway
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
             name: gateway-svc
-            port: 
+            port:
               number: 80

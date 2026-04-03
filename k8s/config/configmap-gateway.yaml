@@ -7,11 +7,18 @@ data:
     server {
         listen 80;
 
-        location /api/data {
-            proxy_pass http://ingestion-svc:3000; 
+        # Dashboard web application
+        location / {
+            proxy_pass http://dashboard-svc;
         }
 
+        # Data ingestion API
+        location /api/data {
+            proxy_pass http://ingestion-svc; 
+        }
+
+        # History read API
         location /api/history {
-            proxy_pass http://lecture-svc:3001; 
+            proxy_pass http://lecture-svc; 
         }
     }

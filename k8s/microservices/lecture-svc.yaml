@@ -7,6 +7,6 @@ spec:
   selector:
     app: lecture
   ports:
-    - port: 3001
+    - port: 80
       targetPort: 3001
       nodePort: 30001

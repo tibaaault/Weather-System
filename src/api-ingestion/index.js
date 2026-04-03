@@ -32,7 +32,8 @@ app.post('/api/data', async (req, res) => {
         const data = req.body;
 
         if (!channel) {
-            return res.status(500).json({ error: "Service RabbitMQ non disponible" });
+            console.warn("⚠️ RabbitMQ non prêt, message ignoré pour :", data.city);
+            return res.status(503).json({ error: "Service RabbitMQ non disponible, veuillez réessayer plus tard" });
         }
 
         // On convertit le JSON en Buffer et on l'envoie dans la file d'attente
