@@ -1,22 +1,13 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: dashboard-vue
   labels:
     app: dashboard
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: dashboard
-  template:
-    metadata:
-      labels:
-        app: dashboard
-    spec:
-      containers:
-      - name: vue-app
-        image: meteo/meteo-dashboard:v1
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 80
+  containers:
+  - name: vue-app
+    image: meteo/meteo-dashboard:v1
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 80

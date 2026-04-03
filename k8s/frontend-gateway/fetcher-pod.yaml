@@ -1,21 +1,14 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: data-fetcher
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: fetcher
-  template:
-    metadata:
-      labels:
-        app: fetcher
-    spec:
-      containers:
-      - name: fetcher-app
-        image: meteo/meteo-fetcher:v1
-        imagePullPolicy: Never
-        envFrom:
-        - configMapRef:
-            name: fetcher-config
+  name: data-fetcher-pod
+  labels:
+    app: fetcher
+spec: 
+  containers:
+  - name: fetcher-app
+    image: meteo/meteo-fetcher:v1
+    imagePullPolicy: Never
+    envFrom:
+    - configMapRef:
+        name: fetcher-config
