@@ -17,7 +17,7 @@ help:
 
 build-images:
 	@echo "🐳 Pointage de Docker vers Minikube et construction des images..."
-	@eval $$(minikube docker-env) && \
+	@eval $$(docker-env) && \
     	docker build -t meteo/api-ingestion:v1 src/api-ingestion/ && \
     	docker build -t meteo/api-processor:v1 src/api-processor/ && \
     	docker build -t meteo/api-lecture:v1 src/api-lecture/ && \

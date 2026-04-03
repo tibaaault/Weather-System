@@ -5,7 +5,7 @@ import json
 
 CITIES = json.loads(os.getenv("CITIES_JSON", "[]"))
 GATEWAY_URL = os.getenv("GATEWAY_URL")
-INTERVAL = int(os.getenv("FETCH_INTERVAL", 300))
+INTERVAL = int(os.getenv("FETCH_INTERVAL", 30))
 
 def fetch_all():
     while True:
@@ -33,7 +33,7 @@ def fetch_all():
                     try:
                         r = requests.post(GATEWAY_URL, json=payload, timeout=5)
                         if r.status_code == 200:
-                            print(f"✅ {city['name']}: {payload['temperature']}°C envoyé.")
+                            print(f"{city['name']}: {payload['temperature']}°C envoyé.")
                             sent = True
                         else:
                             print(f"⚠️ {city['name']}: Erreur {r.status_code} lors de l'envoi. Tentative {retry_count+1}/{max_retries}")
@@ -45,7 +45,7 @@ def fetch_all():
                         time.sleep(2)
 
                 if not sent:
-                    print(f"❌ {city['name']}: Échec de l'envoi après {max_retries} tentatives.")
+                    print(f"{city['name']}: Échec de l'envoi après {max_retries} tentatives.")
                 
             except Exception as e:
                 print(f"Erreur pour {city['name']}: {e}")
