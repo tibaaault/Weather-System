@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lecture-svc
+spec:
+  type: NodePort
+  selector:
+    app: lecture
+  ports:
+    - port: 3001
+      targetPort: 3001
+      nodePort: 30001

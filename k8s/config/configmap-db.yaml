@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-config
+data:
+  MYSQL_ROOT_PASSWORD: "adminpassword"
+  MYSQL_DATABASE: "meteo_db"
+  MYSQL_USER: "user_meteo"
+  MYSQL_PASSWORD: "userpassword"
