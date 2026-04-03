@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: dashboard-vue
+  name: dashboard-vue-pod
   labels:
     app: dashboard
 spec:

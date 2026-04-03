@@ -7,13 +7,11 @@ data:
     server {
         listen 80;
 
-        # Tout ce qui est POST va vers l'Ingestion
         location /api/data {
-            proxy_pass http://ingestion-svc:80; 
+            proxy_pass http://ingestion-svc:3000; 
         }
 
-        # Tout ce qui est GET va vers la Lecture
         location /api/history {
-            proxy_pass http://lecture-svc:80; 
+            proxy_pass http://lecture-svc:3001; 
         }
     }

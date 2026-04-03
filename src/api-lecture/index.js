@@ -17,13 +17,13 @@ const pool = mysql.createPool(dbConfig);
 
 app.get('/api/history', async (req, res) => {
     try {
-        // On interroge la table meteo_data (que ton pod processor créera)
-        const [rows] = await pool.query('SELECT * FROM meteo_data ORDER BY id DESC LIMIT 50');
+        // On interroge la table releves (que ton pod processor créera)
+        const [rows] = await pool.query('SELECT * FROM releves ORDER BY id DESC LIMIT 50');
         res.status(200).json(rows);
     } catch (error) {
         // Si la table n'existe pas encore (code ER_NO_SUCH_TABLE), on ne panique pas
         if (error.code === 'ER_NO_SUCH_TABLE') {
-            console.log("⚠️ La table meteo_data n'existe pas encore, retour d'un tableau vide.");
+            console.log("⚠️ La table 'releves' n'existe pas encore, retour d'un tableau vide.");
             return res.status(200).json([]);
         }
 

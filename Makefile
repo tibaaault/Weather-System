@@ -65,4 +65,9 @@ logs-lecture:
 	kubectl logs lecture-pod --previous || kubectl logs lecture-pod
 
 logs-fetcher:
-	kubectl logs lecture-pod --previous || kubectl logs lecture-pod
+	kubectl logs data-fetcher-pod --previous || kubectl logs data-fetcher-pod
+
+logs-gateway:
+	kubectl logs api-gateway-pod --previous || kubectl logs api-gateway-pod
+
+reset: delete-all build-images apply-all

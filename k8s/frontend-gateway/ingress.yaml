@@ -12,8 +12,8 @@ spec:
         backend:
           service:
             name: dashboard-svc
-            port: 
-              number: 80
+            port:
+              number: 81
       # Requêtes API vers la Gateway
       - path: /api
         pathType: Prefix

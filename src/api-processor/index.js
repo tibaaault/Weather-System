@@ -21,8 +21,8 @@ async function initDB() {
         await connection.execute(`
             CREATE TABLE IF NOT EXISTS releves (
                 id INT AUTO_INCREMENT PRIMARY KEY,
+                city VARCHAR(255) NOT NULL,
                 temperature FLOAT NOT NULL,
-                humidite FLOAT NOT NULL,
                 date_releve TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         `);
@@ -55,8 +55,8 @@ async function startProcessor() {
                     try {
                         // Sauvegarde en base de données
                         await db.execute(
-                            'INSERT INTO releves (temperature, humidite) VALUES (?, ?)',
-                            [data.temperature, data.humidite] // Assure-toi que ton simulateur envoie ces champs
+                            'INSERT INTO releves (city, temperature, date_releve) VALUES (?, ?, FROM_UNIXTIME(?))',
+                            [data.city, data.temperature, data.timestamp]
                         );
                         console.log("💾 Donnée sauvegardée dans MariaDB.");
 

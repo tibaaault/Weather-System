@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: api-gateway
+  name: api-gateway-pod
   labels:
     app: gateway
 spec:
