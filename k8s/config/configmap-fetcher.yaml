@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fetcher-config
+data:
+  CITIES_JSON: |
+    [
+      {"region": "Hauts-de-France", "name": "Lille", "lat": 50.63, "lon": 3.06},
+      {"region": "Hauts-de-France", "name": "Amiens", "lat": 49.89, "lon": 2.29},
+      {"region": "Hauts-de-France", "name": "Roubaix", "lat": 50.69, "lon": 3.17},
+      {"region": "Île-de-France", "name": "Paris", "lat": 48.85, "lon": 2.35},
+      {"region": "Île-de-France", "name": "Boulogne-Billancourt", "lat": 48.83, "lon": 2.24},
+      {"region": "Île-de-France", "name": "Saint-Denis", "lat": 48.93, "lon": 2.35},
+      {"region": "Provence-Alpes-Côte d'Azur", "name": "Marseille", "lat": 43.29, "lon": 5.37},
+      {"region": "Provence-Alpes-Côte d'Azur", "name": "Nice", "lat": 43.71, "lon": 7.26},
+      {"region": "Provence-Alpes-Côte d'Azur", "name": "Toulon", "lat": 43.12, "lon": 5.93}
+    ]
+  GATEWAY_URL: "http://gateway-svc:80/api/data"
+  FETCH_INTERVAL: "300"

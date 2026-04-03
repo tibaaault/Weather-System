@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: meteo-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      # Trafic web vers le Dashboard
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dashboard-svc
+            port: 
+              number: 80
+      # Requêtes API vers la Gateway
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: gateway-svc
+            port: 
+              number: 80

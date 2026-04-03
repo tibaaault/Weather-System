@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-fetcher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fetcher
+  template:
+    metadata:
+      labels:
+        app: fetcher
+    spec:
+      containers:
+      - name: fetcher-app
+        image: tibaaault/meteo-fetcher:latest 
+        imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: fetcher-config
