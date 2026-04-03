@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: fetcher-app
-        image: tibaaault/meteo-fetcher:latest 
-        imagePullPolicy: Always
+        image: meteo/meteo-fetcher:v1
+        imagePullPolicy: Never
         envFrom:
         - configMapRef:
             name: fetcher-config

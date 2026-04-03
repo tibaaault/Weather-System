@@ -20,8 +20,10 @@ build-images:
 	@eval $$(minikube docker-env) && \
     	docker build -t meteo/api-ingestion:v1 src/api-ingestion/ && \
     	docker build -t meteo/api-processor:v1 src/api-processor/ && \
-    	docker build -t meteo/api-lecture:v1 src/api-lecture/
-	@echo "✅ Les 3 images Docker ont été construites avec succès !"
+    	docker build -t meteo/api-lecture:v1 src/api-lecture/ && \
+    	docker build -t meteo/meteo-dashboard:v1 src/dashboard-vue/&& \
+    	docker build -t meteo/meteo-fetcher:v1 src/fetcher-cron/
+	@echo "✅ Les 5 images Docker ont été construites avec succès !"
 
 apply-config:
 	@echo "🚀 Déploiement des configurations..."
@@ -35,7 +37,11 @@ apply-microservices:
 	@echo "⚙️ Déploiement des microservices..."
 	kubectl apply -f k8s/microservices/
 
-apply-all: apply-config apply-stockage apply-microservices
+apply-frontend-gateway:
+	@echo "⚙️ Déploiement des microservices..."
+	kubectl apply -f k8s/frontend-gateway/
+
+apply-all: apply-config apply-stockage apply-microservices apply-frontend-gateway
 	@echo "✅ Déploiement complet terminé !"
 
 delete-all:
@@ -43,6 +49,7 @@ delete-all:
 	kubectl delete -f k8s/microservices/ --ignore-not-found=true
 	kubectl delete -f k8s/stockage/ --ignore-not-found=true
 	kubectl delete -f k8s/config/ --ignore-not-found=true
+	kubectl delete -f k8s/frontend-gateway/ --ignore-not-found=true
 
 status:
 	@echo "📊 Statut des ressources :"
@@ -55,4 +62,7 @@ logs-processor:
 	kubectl logs processor-pod --previous || kubectl logs processor-pod
 
 logs-lecture:
+	kubectl logs lecture-pod --previous || kubectl logs lecture-pod
+
+logs-fetcher:
 	kubectl logs lecture-pod --previous || kubectl logs lecture-pod
