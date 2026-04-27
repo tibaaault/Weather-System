@@ -16,4 +16,4 @@ data:
       {"region": "Provence-Alpes-Côte d'Azur", "name": "Toulon", "lat": 43.12, "lon": 5.93}
     ]
   GATEWAY_URL: "http://gateway-svc:80/api/data"
-  FETCH_INTERVAL: "300"
+  FETCH_INTERVAL: "30"
