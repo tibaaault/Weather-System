@@ -9,4 +9,4 @@ spec:
   ports:
     - port: 3306
       targetPort: 3306
-      nodePort: 30306 # Port accessible depuis l'extérieur du cluster si besoin
+      nodePort: 30306 

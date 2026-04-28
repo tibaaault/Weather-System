@@ -10,8 +10,8 @@ spec:
     - name: amqp
       port: 5672
       targetPort: 5672
-      nodePort: 30572       # Ton app Node.js utilisera amqp://rabbitmq-svc:5672
+      nodePort: 30572       
     - name: management
       port: 15672
       targetPort: 15672
-      nodePort: 31672       # Tu pourras ouvrir http://localhost:31672 dans ton navigateur
+      nodePort: 31672       
