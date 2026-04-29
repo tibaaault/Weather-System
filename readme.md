@@ -1,17 +1,6 @@
-cd src/fetcher-cron
-docker build -t tibaaault/meteo-fetcher:latest .
+# Installation
 
-cd ../dashboard-vue
-docker build -t tibaaault/meteo-dashboard:latest .
+make build-images
+make apply-all
+make status
 
-kubectl apply -f k8s/config/
-kubectl apply -f k8s/frontend-et-gateway/
-
-# Dossier src/fetcher-cron
-docker build -t tibaaault/meteo-fetcher:latest .   
-cd ../dashboard-vue
-docker build -t tibaaault/meteo-dashboard:latest .
-
-# Racine 
-kubectl apply -f k8s/config/
-kubectl apply -f k8s/frontend-gateway/  
